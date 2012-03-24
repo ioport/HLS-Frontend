@@ -1,9 +1,33 @@
-#!/usr/bin/ruby
+#!/usr/bin/env ruby
+require 'optparse'
+
+options = {}
+opt = OptionParser.new
+begin
+	opt.parse!(ARGV)
+rescue
+	print "unknown option\n"
+	exit
+end
+
+if ARGV.size < 2 then
+	print "no input file or output path is spedified\n"
+	exit
+end
+
+inputfile=ARGV[0]
+outputpath=ARGV[1]
+
+if !File.exist?(inputfile) then
+	print "input file does not exist\n"
+	exit
+end
+inputbasename = File.basename(inputfile)
 
 print <<EOCONFIG
 temp_dir: '/tmp/'
-segment_prefix: 'sample'
-index_prefix: 'stream'
+segment_prefix: '#{inputbasename}'
+index_prefix: '#{inputbasename}'
 
 # type of logging: STDOUT, FILE
 log_type: 'STDOUT'
@@ -14,7 +38,7 @@ log_level: 'DEBUG'
 
 # where the origin video is going to come from
 #input_location: '-'
-input_location: '/home/hoge/streamtest/Record_20120229-020151.ts'
+input_location: '#{inputfile}'
 
 # segment length in seconds
 segment_length: 10 
@@ -84,5 +108,5 @@ scp_dev:
 
 copy_dev:
   transfer_type: 'copy'
-  directory: '/home/hoge/public_html'
+  directory: '#{outputpath}'
 EOCONFIG
