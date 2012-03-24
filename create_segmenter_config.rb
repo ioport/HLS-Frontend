@@ -22,7 +22,7 @@ if !File.exist?(inputfile) then
 	print "input file does not exist\n"
 	exit
 end
-inputbasename = File.basename(inputfile)
+inputbasename = File.basename(inputfile, ".*")
 
 print <<EOCONFIG
 temp_dir: '/tmp/'
