@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'shell'
 
+progdir = File.dirname(File.expand_path($PROGRAM_NAME))
+
 Dir.glob("*.ts").each { |tsfname|
 	tsbasename = File.basename(tsfname, ".*")
 	lockfname = tsbasename + ".lock"
@@ -19,7 +21,7 @@ Dir.glob("*.ts").each { |tsfname|
 		sh = Shell.new
 		sh.transact {
 			system("ls", "-l") > STDOUT
-			system("./create_segmenter_config.rb", tsfname) > STDOUT
+			system(progdir + "/create_segmenter_config.rb", tsfname, File.dirname(tsfname)) > STDOUT
 		}
 	}
 
