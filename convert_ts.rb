@@ -6,6 +6,7 @@ progdir = File.dirname(File.expand_path($PROGRAM_NAME))
 Dir.glob("*.ts").each { |tsfname|
 	tsbasename = File.basename(tsfname, ".*")
 	lockfname = tsbasename + ".lock"
+	configfname = tsbasename + ".config"
 	if File.exist?(lockfname) then
 		next
 	end
@@ -20,8 +21,8 @@ Dir.glob("*.ts").each { |tsfname|
 		}
 		sh = Shell.new
 		sh.transact {
-			system("ls", "-l") > STDOUT
-			system(progdir + "/create_segmenter_config.rb", tsfname, File.dirname(tsfname)) > STDOUT
+			system(progdir + "/create_segmenter_config.rb", tsfname, File.dirname(tsfname)) > configfname 
+			system(progdir + "/http_streamer.rb", configfname) > STDOUT
 		}
 	}
 
