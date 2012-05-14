@@ -34,7 +34,7 @@ log_type: 'STDOUT'
 #log_type: 'FILE'
 #log_file: '/tmp/streamer.log'
 # levels: DEBUG, INFO, WARN, ERROR
-log_level: 'DEBUG'
+log_level: 'WARN'
 
 # where the origin video is going to come from
 #input_location: '-'
@@ -58,7 +58,7 @@ source_command: 'cat %s'
 segmenter_binary: './live_segmenter'
 
 # the encoding profile to use
-encoding_profile: [ 'cell_16x9_150k', 'cell_16x9_240k', 'wifi_16x9_440k', 'wifi_16x9_640k' ]
+encoding_profile: [ 'cell_16x9_150k', 'cell_16x9_240k', 'wifi_16x9_640k' ]
 
 # The upload profile to use
 transfer_profile: 'copy_dev'
