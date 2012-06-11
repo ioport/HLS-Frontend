@@ -20,7 +20,8 @@ outputpath=ARGV[0]
 
 progdir = File.dirname(File.expand_path($PROGRAM_NAME))
 
-print <<EOL
+out_f = open(outputpath + "playlist.html", "w")
+out_f.print <<EOL
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/x
 html1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -38,9 +39,9 @@ EOL
 Dir.chdir(outputpath)
 Dir.glob("*_multi.m3u8").each { |plfname|
 	plbasename = File.basename(plfname, ".*")
-	print "<li> <a href=\"" + plbasename + ".html\">" + plbasename + "</a></li>"
+	out_f.print "<li> <a href=\"" + plbasename + ".html\">" + plbasename + "</a></li>"
 }
-print <<EOL
+out_f.print <<EOL
 </ul>
 </body>
 </html>
