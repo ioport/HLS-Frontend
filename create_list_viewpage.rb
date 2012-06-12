@@ -40,6 +40,15 @@ Dir.chdir(outputpath)
 Dir.glob("*_multi.m3u8").each { |plfname|
 	plbasename = File.basename(plfname, ".*")
 	out_f.print "<li> <a href=\"" + plbasename + ".html\">" + plbasename + "</a></li>"
+	out_f_v = open(outputpath + plbasename + ".html", "w")
+	out_f_v.print <<EOL
+	<html> <body>
+EOL
+	out_f_v.print "<video src=\"" + plfname + "\" height=\"300\" width=\"400\"></video>"
+	out_f_v.print <<EOL
+	</body> </html>
+EOL
+	out_f_v.close
 }
 out_f.print <<EOL
 </ul>
