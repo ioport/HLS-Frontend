@@ -42,7 +42,9 @@ Dir.glob("*_multi.m3u8").each { |plfname|
 	out_f.print "<li> <a href=\"" + plbasename + ".html\">" + plbasename + "</a></li>"
 	out_f_v = open(plbasename + ".html", "w")
 	out_f_v.print <<EOL
-	<html> <body>
+	<html>
+	<head> <meta http-equiv="content-type" content="text/html; charset=utf-8" /> </head>
+	<body>
 EOL
 	out_f_v.print "<video src=\"" + plfname + "\" height=\"300\" width=\"400\"></video>"
 	out_f_v.print <<EOL
